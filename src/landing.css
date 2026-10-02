@@ -1,0 +1,54 @@
+.landing-page { position: relative; width: 100%; height: 100svh; min-height: 520px; overflow: hidden; isolation: isolate; background: #17231f; color: #fff; }
+.landing-room { position: absolute; inset: 0; background-image: url('/assets/landing-time-variations.png'); background-repeat: no-repeat; background-size: 200% 200%; transition: transform 650ms ease, filter 650ms ease; }
+.period-morning .landing-room { background-position: 0 0; filter: brightness(1.03); }
+.period-day .landing-room { background-position: 100% 0; filter: brightness(1.05); }
+.period-sunset .landing-room { background-position: 0 100%; filter: saturate(1.04); }
+.period-night .landing-room { background-position: 100% 100%; filter: brightness(.94); }
+.landing-window-light { position: absolute; top: 0; right: 0; width: 55%; height: 58%; pointer-events: none; opacity: .12; mix-blend-mode: screen; }
+.period-morning .landing-window-light { background: linear-gradient(115deg, transparent 25%, #ffe1a0); }
+.period-day .landing-window-light { background: linear-gradient(115deg, transparent 25%, #d8e7f1); }
+.period-sunset .landing-window-light { background: linear-gradient(115deg, transparent 20%, #f4a971); opacity: .17; }
+.period-night .landing-window-light { background: linear-gradient(115deg, transparent 25%, #75a0ca); opacity: .07; }
+.landing-screen-cell { position: absolute; left: 38.2%; top: 52.5%; width: 13px; height: 10px; border: 1px solid #39a873; background: #39a87326; box-shadow: 0 0 7px #39a87355; opacity: .75; animation: landing-cell-breathe 8s ease-in-out infinite; transition: transform 650ms ease, box-shadow 650ms ease; }
+.landing-steam { position: absolute; left: 63%; top: 58%; display: flex; gap: 6px; opacity: .45; }
+.landing-steam i { display: block; width: 2px; height: 28px; border-left: 1px solid #f8eee0; border-radius: 50%; animation: landing-steam-rise 7s ease-in-out infinite; }
+.landing-steam i:nth-child(2) { animation-delay: -2s; }.landing-steam i:nth-child(3) { animation-delay: -4s; }
+.landing-traffic { position: absolute; left: 66%; top: 57%; width: 25%; height: 2px; opacity: .55; }
+.landing-traffic::before { content: ''; display: block; width: 11px; height: 2px; border-radius: 4px; background: #ffd6a5; box-shadow: 0 0 6px #ffbf85; animation: landing-traffic-move 23s linear infinite; }
+.landing-leaf { position: absolute; right: 10%; top: 44%; width: 13px; height: 28px; border-radius: 90% 0 90% 0; background: #294b35; opacity: .45; transform-origin: bottom left; animation: landing-leaf-sway 12s ease-in-out infinite; }
+.landing-period { position: absolute; z-index: 3; top: 18px; left: 17px; width: 175px; min-height: 91px; display: flex; flex-direction: column; justify-content: center; gap: 7px; padding: 12px 15px; color: #f6f7ef; font-size: 12px; letter-spacing: .08em; background: #17211f; border-radius: 4px 0 8px 0; transition: opacity 450ms ease; }
+.landing-period strong { font-size: 14px; font-weight: 650; }
+.landing-period small { color: #ccd7d0; font-size: 10px; letter-spacing: .02em; white-space: nowrap; }
+.landing-hero { position: absolute; z-index: 4; inset: 0; pointer-events: none; transition: opacity 450ms ease; }
+.landing-hero h1, .landing-hero p { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.landing-hero button { position: absolute; left: 50%; top: 32.7%; transform: translateX(-50%); width: 214px; height: 72px; border: 0; border-radius: 999px; background: #0d6047; color: white; font-size: 18px; font-weight: 650; box-shadow: 0 6px 20px #04180b3d; pointer-events: auto; transition: background-color 180ms ease, box-shadow 180ms ease; }
+.landing-hero button:hover { background: #127457; box-shadow: 0 8px 24px #04180b52; }
+.landing-hero button span { margin-left: 7px; }
+.landing-hero button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.landing-page.is-exiting .landing-room { transform: scale(1.035); filter: brightness(.58) blur(1px); }
+.landing-page.is-exiting .landing-hero, .landing-page.is-exiting .landing-period { opacity: 0; }
+.landing-page.is-exiting .landing-screen-cell { transform: scale(1.4); box-shadow: 0 0 12px #53bb7e; }
+@keyframes landing-cell-breathe { 0%, 100% { opacity: .62; } 50% { opacity: .9; } }
+@keyframes landing-steam-rise { 0%, 100% { transform: translateY(5px) scaleX(.7); opacity: 0; } 35% { opacity: .55; } 75% { transform: translateY(-16px) scaleX(1.4); opacity: 0; } }
+@keyframes landing-traffic-move { from { transform: translateX(0); opacity: 0; } 10%, 85% { opacity: .8; } to { transform: translateX(26vw); opacity: 0; } }
+@keyframes landing-leaf-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@media (max-width: 700px) {
+  .landing-page { min-height: 600px; }
+  .landing-room { background-size: auto 300%; }
+  .period-morning .landing-room { background-position: 20% 24%; }
+  .period-day .landing-room { background-position: 75% 24%; }
+  .period-sunset .landing-room { background-position: 20% 100%; }
+  .period-night .landing-room { background-position: 75% 100%; }
+  .landing-page::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to bottom, #15211f 0, #15211f 14%, #15211fa8 27%, transparent 39%, transparent 52%, #0b1719e8 100%); }
+  .landing-period { top: 15px; left: 15px; width: auto; min-height: 0; padding: 7px 10px; background: #17211fc7; }
+  .landing-hero { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 0 26px calc(42px + env(safe-area-inset-bottom)); }
+  .landing-hero h1, .landing-hero p { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+  .landing-hero h1 { font-size: clamp(28px, 8vw, 39px); line-height: 1.2; letter-spacing: -.055em; font-weight: 750; text-shadow: 0 2px 12px #0612136b; }
+  .landing-hero p { margin-top: 12px; max-width: 330px; color: #f3f1e8; font-size: 14px; line-height: 1.6; text-shadow: 0 2px 9px #06121380; }
+  .landing-hero button { position: static; transform: none; width: auto; height: auto; padding: 13px 22px; margin-top: 24px; font-size: 15px; }
+  .landing-traffic, .landing-leaf, .landing-steam, .landing-screen-cell { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-room, .landing-hero, .landing-period, .landing-screen-cell, .landing-hero button { transition: none !important; }
+  .landing-screen-cell, .landing-steam i, .landing-traffic::before, .landing-leaf { animation: none !important; }
+}

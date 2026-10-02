@@ -1,0 +1,67 @@
+.home-tour-grid { position: relative; }
+.home-tour-card { min-height: 218px; padding: 20px 22px; overflow: hidden; transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease; }
+.home-tour-card h2 { margin: 17px 0 5px; }
+.home-tour-card p { margin: 0; }
+.home-tour-card.is-highlighted, .home-tour-card:hover, .home-tour-card:focus-visible { transform: translateY(-2px); border-color: #92bea1; background: #f8fcf8; }
+.home-tour-card.is-clicked { border-color: var(--green); background: #f2faf3; }
+.home-tour-card.is-highlighted .home-arrow, .home-tour-card:hover .home-arrow, .home-tour-card:focus-visible .home-arrow { color: var(--green); transform: translate(2px, -2px); }
+.home-tour-card:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.home-arrow { transition: color 180ms ease, transform 180ms ease; }
+.home-guide-cursor { position: absolute; top: 0; left: 0; z-index: 2; width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px #17644920; opacity: 0; pointer-events: none; transition: transform 450ms cubic-bezier(.45, 0, .2, 1), opacity 180ms ease; }
+.home-guide-cursor.is-visible { opacity: 1; }
+.home-guide-cursor.is-snapping { transition-duration: 180ms; }
+.home-concept { height: 54px; margin-top: 15px; color: #6e9580; font-size: 10px; }
+.home-finance { display: grid; gap: 5px; max-width: 195px; }
+.home-finance-row { display: flex; align-items: center; gap: 9px; }
+.home-finance-row > span { width: 39px; flex: none; }
+.home-finance-row > i { display: block; width: 125px; height: 5px; border-radius: 5px; background: #e5eee7; overflow: hidden; }
+.home-finance-row b { display: block; height: 100%; border-radius: inherit; background: #70a887; transform-origin: left; }
+.home-finance-row .fill-0 { width: 88%; }.home-finance-row .fill-1 { width: 61%; background: #88b79a; }.home-finance-row .fill-2 { width: 42%; background: #a6c9ac; }
+.home-tour-card.is-animated .home-finance-row b { animation: home-grow 900ms ease-out both; }
+.home-tour-card.is-animated .home-finance-row:nth-child(2) b { animation-delay: 100ms; }.home-tour-card.is-animated .home-finance-row:nth-child(3) b { animation-delay: 200ms; }
+.home-consumption { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.home-consumption > span { padding: 5px 7px; border: 1px solid #dce9df; background: #f1f7f2; border-radius: 12px; white-space: nowrap; }
+.home-consumption > i { font-style: normal; color: #a1b4a5; }
+.home-consumption > b { color: var(--green); font-size: 10px; font-weight: 700; opacity: .65; }
+.home-tour-card.is-animated .home-consumption > span { animation: home-node 500ms ease-out both; }
+.home-tour-card.is-animated .home-consumption > span:nth-of-type(2) { animation-delay: 180ms; }.home-tour-card.is-animated .home-consumption > span:nth-of-type(3) { animation-delay: 360ms; }
+.home-tour-card.is-animated .home-consumption > b { animation: home-appear 400ms 600ms ease-out both; }
+.home-transport { max-width: 210px; display: grid; gap: 6px; }
+.home-transport > div { display: flex; align-items: center; gap: 9px; }.home-transport > div > span { width: 25px; flex: none; }
+.home-transport i { position: relative; display: block; width: 152px; height: 2px; background: #d3e1d8; }
+.home-transport i::after { content: ''; position: absolute; right: 0; top: -2px; width: 5px; height: 5px; border-radius: 50%; background: #a5bbae; }
+.home-transport i b { position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #549a70; }
+.home-transport > div:nth-child(2) i b { background: #6f9cb9; }
+.home-transport small { text-align: center; color: #82958a; font-size: 9px; }
+.home-tour-card.is-animated .home-transport > div:first-child i b { animation: home-travel 1150ms ease-in-out both; }
+.home-tour-card.is-animated .home-transport > div:nth-child(2) i b { animation: home-travel 930ms ease-in-out both; }
+.home-comparison { width: 170px; display: grid; gap: 6px; }
+.home-comparison > div { display: flex; align-items: center; gap: 8px; }.home-comparison span { width: 10px; font-weight: 700; }
+.home-comparison i { display: block; width: 145px; height: 6px; border-radius: 6px; background: #edf2ee; }
+.home-comparison b { display: block; height: 100%; border-radius: inherit; background: #7ba88c; transform-origin: left; }
+.home-comparison .compare-0 { width: 59%; }.home-comparison .compare-1 { width: 74%; background: #81a8c3; }.home-comparison .compare-2 { width: 52%; background: #c6a07d; }
+.home-tour-card.is-animated .home-comparison b { animation: home-shift 780ms ease-out both; }
+.home-tour-card.is-animated .home-comparison > div:nth-child(2) b { animation-delay: 90ms; }.home-tour-card.is-animated .home-comparison > div:nth-child(3) b { animation-delay: 180ms; }
+.home-boundary { max-width: 190px; }
+.home-boundary svg { display: block; width: 100%; height: 54px; overflow: visible; }
+.home-boundary line { stroke: #b6c9b9; stroke-width: 1; stroke-dasharray: 4 4; }
+.home-boundary path { fill: none; stroke: #4d9a6a; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 185; stroke-dashoffset: 0; }
+.home-boundary circle { fill: #4d9a6a; stroke: #fff; stroke-width: 1.5; }
+.home-tour-card.is-animated .home-boundary path { animation: home-draw 980ms ease-out both; }
+.home-tour-card.is-animated .home-boundary circle { animation: home-pulse 600ms 750ms ease-out both; transform-origin: 72px 27px; }
+@keyframes home-grow { from { transform: scaleX(.42); } to { transform: scaleX(1); } }
+@keyframes home-node { from { background: #f1f7f2; color: #8da596; } to { background: #e2f1e6; color: #397753; } }
+@keyframes home-appear { from { opacity: 0; } to { opacity: 1; } }
+@keyframes home-travel { from { left: 0; } to { left: calc(100% - 8px); } }
+@keyframes home-shift { from { transform: scaleX(.78); } to { transform: scaleX(1); } }
+@keyframes home-draw { from { stroke-dashoffset: 185; } to { stroke-dashoffset: 0; } }
+@keyframes home-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.45); } }
+@media (max-width: 760px) {
+  .home-tour-card { min-height: 188px; padding: 16px; }
+  .home-tour-card h2 { margin-top: 11px; }
+  .home-concept { margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-guide-cursor { display: none; }
+  .home-tour-card, .home-arrow, .home-concept * { animation: none !important; transition: none !important; }
+}
