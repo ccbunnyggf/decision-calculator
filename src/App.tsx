@@ -12,6 +12,7 @@ import { CashLayers } from './DashboardVisuals.tsx';
 import { priceHourlyPoints, timeChartPoints } from './chartData.ts';
 import { HomePage } from './HomePage.tsx';
 import { LandingPage } from './LandingPage.tsx';
+import { trackLandingEnter, trackModuleOpen } from './analytics.ts';
 
 
 function attempt<T>(fn: () => T): { data: T | null; error: string | null } {
@@ -447,6 +448,8 @@ export default function App() {
   const changeState = (patch: Partial<AppState>) => setState(prev => ({ ...prev, ...patch }));
   const navigate = (next: Route) => {
     if (next === route) return;
+    if (route === 'landing' && next === 'home') trackLandingEnter();
+    if (next !== 'landing' && next !== 'home') trackModuleOpen(next);
     window.history.pushState(null, '', `#/${next}`);
     setRoute(next);
     setDetail(null);

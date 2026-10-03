@@ -2,6 +2,10 @@
 
 本地 Web App。数据只保存在浏览器 `localStorage`，不需要注册、后端或网络服务。打开后先看到随本地时间切换光线的生活场景；点击“开始探索”进入五个工具入口：个人财务、消费计算、出行比较、方案比较、边界分析。初次打开使用示例数据，请先替换为自己的输入。
 
+Plausible Analytics 已预留可选入口。只有 production 构建同时配置该站点真实的 `VITE_PLAUSIBLE_SCRIPT_URL` 和最终公开网站的 `VITE_ANALYTICS_PUBLIC_URL`，且浏览器地址与该公开地址匹配时才异步加载脚本。当前未配置脚本地址；本地访问不会被统计。统计代码只发送页面访问、`landing_enter` 和带固定模块名称的 `module_open`，不读取表单或 `localStorage`。
+
+GitHub Pages 通过 `.github/workflows/deploy-pages.yml` 在推送到 `main` 后运行测试、构建并发布 `dist`，正式网址为 `https://ccbunnyggf.github.io/decision-calculator/`。GitHub Actions 构建使用 `/decision-calculator/` 资源路径；本地构建继续使用根路径。首次部署需在仓库 Pages 设置中将发布来源选为 GitHub Actions。
+
 ## 运行
 
 已附带构建结果。电脑装有 Node.js 24 或更新版本时，在本目录运行：
