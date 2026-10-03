@@ -1,49 +1,45 @@
 type Plausible = ((event: string, options?: { props?: { module: string } }) => void) & {
   q?: unknown[][];
-  init?: (options?: { hashBasedRouting?: boolean }) => void;
-  o?: { hashBasedRouting?: boolean };
+  init?: (options?: { hashBasedRouting?: boolean; fileDownloads?: boolean; outboundLinks?: boolean; formSubmissions?: boolean }) => void;
+  o?: { hashBasedRouting?: boolean; fileDownloads?: boolean; outboundLinks?: boolean; formSubmissions?: boolean };
 };
 
 declare global {
   interface Window { plausible?: Plausible }
 }
 
-export function shouldLoadWebAnalytics({ production, scriptUrl, publicUrl, currentUrl }: {
+export const PLAUSIBLE_TRACKER_URL = 'https://plausible.io/js/pa-CbOUS56nCFZT7XxoS7hdb.js';
+const PUBLIC_ORIGIN = 'https://ccbunnyggf.github.io';
+const PUBLIC_PATH = '/decision-calculator/';
+
+export function shouldLoadWebAnalytics({ production, currentUrl }: {
   production: boolean;
-  scriptUrl?: string;
-  publicUrl?: string;
   currentUrl: string;
 }): boolean {
-  if (!production || !scriptUrl?.trim() || !publicUrl?.trim()) return false;
+  if (!production) return false;
   try {
-    const script = new URL(scriptUrl);
-    const expected = new URL(publicUrl);
     const current = new URL(currentUrl);
-    if (script.origin !== 'https://plausible.io' || !/^\/js\/pa-[A-Za-z0-9_-]+\.js$/.test(script.pathname) || script.search || script.hash) return false;
-    if (expected.protocol !== 'https:' || expected.search || expected.hash) return false;
-    const path = expected.pathname.endsWith('/') ? expected.pathname : `${expected.pathname}/`;
-    return current.origin === expected.origin && current.pathname.startsWith(path);
+    return current.origin === PUBLIC_ORIGIN && current.pathname.startsWith(PUBLIC_PATH);
   } catch {
     return false;
   }
 }
 
 export function installWebAnalytics(): void {
-  const scriptUrl = import.meta.env.VITE_PLAUSIBLE_SCRIPT_URL?.trim();
-  const publicUrl = import.meta.env.VITE_ANALYTICS_PUBLIC_URL?.trim();
-  if (!shouldLoadWebAnalytics({ production: import.meta.env.PROD, scriptUrl, publicUrl, currentUrl: window.location.href })) return;
+  if (!shouldLoadWebAnalytics({ production: import.meta.env.PROD, currentUrl: window.location.href })) return;
+
+  const plausible = (window.plausible ?? ((...args: unknown[]) => {
+    (plausible.q = plausible.q ?? []).push(args);
+  })) as Plausible;
+  plausible.init = plausible.init ?? ((options = {}) => { plausible.o = options; });
+  window.plausible = plausible;
+  plausible.init({ hashBasedRouting: true, fileDownloads: false, outboundLinks: false, formSubmissions: false });
 
   const load = () => {
-    if (document.querySelector(`script[src="${scriptUrl}"]`)) return;
-    const plausible = (window.plausible ?? ((...args: unknown[]) => {
-      (plausible.q = plausible.q ?? []).push(args);
-    })) as Plausible;
-    plausible.init = plausible.init ?? ((options = {}) => { plausible.o = options; });
-    window.plausible = plausible;
-    plausible.init({ hashBasedRouting: true });
+    if (document.querySelector(`script[src="${PLAUSIBLE_TRACKER_URL}"]`)) return;
     const script = document.createElement('script');
     script.async = true;
-    script.src = scriptUrl!;
+    script.src = PLAUSIBLE_TRACKER_URL;
     script.onerror = () => { script.remove(); window.plausible = undefined; };
     document.head.appendChild(script);
   };
